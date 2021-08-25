@@ -6,4 +6,5 @@ extern crate chrono;
 extern crate uuid;
 
 pub mod id;
+pub mod extension;
 

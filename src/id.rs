@@ -1,6 +1,8 @@
 use chrono::{NaiveDate};
 use uuid::{Uuid};
 
+use super::extension::{CertifiedExtensionType};
+
 /// This is the basis for the ID System.
 /// The ID Struct is the base unit and an ID can (and should)
 /// be used everywhere it can be. <br>
@@ -15,6 +17,7 @@ pub struct Id {
     pub last_name: String,
     pub date_of_birth: NaiveDate,
     pub emails: Vec<String>,
+    pub certified_extensions: Vec<CertifiedExtensionType>,
     //pub address: String,
 }
 
@@ -32,6 +35,7 @@ impl Id {
             last_name: String::from(""),
             date_of_birth: NaiveDate::from_ymd(1970, 01, 01),
             emails: Vec::new(),
+            certified_extensions: Vec::new(),
         }
     }
 
@@ -39,7 +43,7 @@ impl Id {
     /// For example, if the information is queried from a database,
     /// this function will return an object from the field info
     pub fn new_from_data(_uuid: Uuid, _first_name: String, _middle_name: String, _last_name: String,
-                _date_of_birth: NaiveDate, _emails: Vec<String>) -> Id {
+                _date_of_birth: NaiveDate, _emails: Vec<String>, _ce: Vec<CertifiedExtensionType>) -> Id {
         Id {
             // This is insufficient, while UUID collision is unlikely,
             // it is possible. UUID's should be hashed on creation, test if UUID
@@ -50,6 +54,7 @@ impl Id {
             last_name: _last_name,
             date_of_birth: _date_of_birth,
             emails: _emails,
+            certified_extensions: _ce,
         }
     }
 

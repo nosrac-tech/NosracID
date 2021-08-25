@@ -13,8 +13,9 @@ fn test_blank_id_construction() {
         first_name: String::from("First"),
         middle_name: String::from("Middle"),
         last_name: String::from("Last"),
-        emails: vec![String::from("example@example.com")],
         date_of_birth: NaiveDate::from_ymd(1970, 01, 01),
+        emails: vec![String::from("example@example.com")],
+        certified_extensions: Vec::new()
     };
 
 }
@@ -29,5 +30,6 @@ fn test_id_from_data() {
         String::from("Last"),
         NaiveDate::from_ymd(1970, 01, 01),
         vec![String::from("example@example.com")],
+        Vec::new(),
     );
 }

@@ -1,4 +1,5 @@
 use nosracid::id::Id;
+use nosracid::extension;
 use uuid::{Uuid};
 
 // External package imports
@@ -6,6 +7,11 @@ use chrono::{NaiveDate};
 
 #[test]
 fn test_blank_id_construction() {
+
+    let test_ssn = extension::US_SSN::new(String::from("000000000")).unwrap();
+    //let test_dln = extension::US_DLN::new(String::from("0000000000"));
+
+    let extension = vec![extension::CertifiedExtension::US_SSN(test_ssn)];
 
     // test manual construction of rule
     let _test_id = Id {
@@ -15,7 +21,7 @@ fn test_blank_id_construction() {
         last_name: String::from("Last"),
         date_of_birth: NaiveDate::from_ymd(1970, 01, 01),
         emails: vec![String::from("example@example.com")],
-        certified_extensions: Vec::new()
+        certified_extensions: extension
     };
 
 }

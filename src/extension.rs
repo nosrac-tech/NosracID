@@ -1,12 +1,12 @@
 /// List of certified (Nosrac created) extensions
 #[derive(PartialEq, Eq, Clone, Debug)]
 #[allow(non_camel_case_types)]
-pub enum CertifiedExtensionType {
-    US_SSN,
-    US_DLN,
+pub enum CertifiedExtension {
+    US_SSN(US_SSN),
+    US_DLN(US_DLN),
 }
 
-/// Despite SSNs being a number, it is stored
+/// Social Security Numbers are stored
 /// as a String object so that it can validated more easily.
 #[derive(PartialEq, Eq, Clone, Debug)]
 #[allow(non_camel_case_types)]
@@ -27,5 +27,22 @@ impl US_SSN {
             None
         }
 
+    }
+}
+
+/// US Driver License number
+#[derive(PartialEq, Eq, Clone, Debug)]
+#[allow(non_camel_case_types)]
+pub struct US_DLN {
+    ssn: String,
+}
+
+impl US_DLN {
+    /// Creates a new SSN
+    pub fn new(_ssn: String) -> US_SSN {
+        // Because DL # do not follow a standard format, no validation is necessary
+        US_SSN {
+            ssn: _ssn,
+        }
     }
 }

@@ -1,13 +1,13 @@
 use chrono::{NaiveDate};
 use uuid::{Uuid};
 
-use super::extension::{CertifiedExtensionType};
+use super::extension::{CertifiedExtension};
 
 /// This is the basis for the ID System.
 /// The ID Struct is the base unit and an ID can (and should)
 /// be used everywhere it can be. <br>
 /// TODO: Storing and retrieving ID's needs to be supported.
-/// Building ID's manually in code is fine for now, but really a database
+/// Building IDs manually in code is fine for now, but really a database
 /// needs to be stood up.
 #[derive(PartialEq, Eq, Clone, Debug)]
 pub struct Id {
@@ -17,7 +17,7 @@ pub struct Id {
     pub last_name: String,
     pub date_of_birth: NaiveDate,
     pub emails: Vec<String>,
-    pub certified_extensions: Vec<CertifiedExtensionType>,
+    pub certified_extensions: Vec<CertifiedExtension>,
     //pub address: String,
 }
 
@@ -43,7 +43,7 @@ impl Id {
     /// For example, if the information is queried from a database,
     /// this function will return an object from the field info
     pub fn new_from_data(_uuid: Uuid, _first_name: String, _middle_name: String, _last_name: String,
-                _date_of_birth: NaiveDate, _emails: Vec<String>, _ce: Vec<CertifiedExtensionType>) -> Id {
+                _date_of_birth: NaiveDate, _emails: Vec<String>, _ce: Vec<CertifiedExtension>) -> Id {
         Id {
             // This is insufficient, while UUID collision is unlikely,
             // it is possible. UUID's should be hashed on creation, test if UUID

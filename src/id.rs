@@ -1,5 +1,6 @@
 use chrono::{NaiveDate};
 use uuid::{Uuid};
+use serde::{Serialize, Deserialize};
 
 use super::extension::{CertifiedExtension};
 
@@ -9,7 +10,7 @@ use super::extension::{CertifiedExtension};
 /// TODO: Storing and retrieving ID's needs to be supported.
 /// Building IDs manually in code is fine for now, but really a database
 /// needs to be stood up.
-#[derive(PartialEq, Eq, Clone, Debug)]
+#[derive(Serialize, Deserialize, PartialEq, Debug)]
 pub struct Id {
     pub uuid: Uuid,
     pub first_name: String,
@@ -56,6 +57,11 @@ impl Id {
             emails: _emails,
             certified_extensions: _ce,
         }
+    }
+
+    /// Returns json string of an [Id] struct
+    pub fn to_json(&self) -> String {
+        serde_json::to_string(self).unwrap()
     }
 
 }

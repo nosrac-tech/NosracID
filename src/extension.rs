@@ -1,14 +1,17 @@
-/// List of certified (Nosrac created) extensions
-#[derive(PartialEq, Eq, Clone, Debug)]
+use serde::{Serialize, Deserialize};
+
+
+/// List of certified extensions
+#[derive(Serialize, Deserialize, PartialEq, Debug)]
 #[allow(non_camel_case_types)]
 pub enum CertifiedExtension {
     US_SSN(US_SSN),
     US_DLN(US_DLN),
 }
 
-/// Social Security Numbers are stored
+/// Social Security numbers are stored
 /// as a String object so that it can validated more easily.
-#[derive(PartialEq, Eq, Clone, Debug)]
+#[derive(Serialize, Deserialize, PartialEq, Debug)]
 #[allow(non_camel_case_types)]
 pub struct US_SSN {
     ssn: String,
@@ -31,7 +34,7 @@ impl US_SSN {
 }
 
 /// US Driver License number
-#[derive(PartialEq, Eq, Clone, Debug)]
+#[derive(Serialize, Deserialize, PartialEq, Debug)]
 #[allow(non_camel_case_types)]
 pub struct US_DLN {
     ssn: String,

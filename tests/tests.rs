@@ -8,6 +8,8 @@ use uuid::{Uuid};
 #[test]
 fn test_blank_id_construction() {
 
+    // creates blank SSN now for formatting
+    // reasons
     let test_ssn = US_SSN::new(String::from("000000000")).unwrap();
 
     // test manual construction of rule
@@ -25,7 +27,8 @@ fn test_blank_id_construction() {
 
 #[test]
 fn test_id_from_data() {
-    // test constructor from data
+
+    // test constructor when data is known
     let _test_id = Id::new_from_data(
         Uuid::new_v4(),
         String::from("First"),
@@ -40,6 +43,8 @@ fn test_id_from_data() {
 
 #[test]
 fn test_id_to_json() {
+
+    // start with serialized Id
     let id_str = r#"{"uuid":"6db53f85-e3a2-4c1f-9471-d2429019736d","first_name":"First","middle_name":"Middle","last_name":"Last","date_of_birth":"1970-01-01","emails":["example@example.com"],"certified_extensions":[{"US_SSN":{"ssn":"000000000"}}]}"#;
 
     // Test conversion of ID to json object
@@ -59,13 +64,15 @@ fn test_id_to_json() {
     // Convert the ID to a JSON string.
     let serialized = _test_id.to_json();
 
+    // compare given str with serialized struct
     assert_eq!(id_str, serialized);
 
 }
 
 #[test]
 fn test_json_to_id() {
-    // Test conversion of ID to json object
+    // test conversion of ID to json object
+
     let test_ssn = US_SSN::new(String::from("000000000")).unwrap();
 
     // test manual construction of rule
@@ -79,10 +86,11 @@ fn test_json_to_id() {
         certified_extensions: vec![CertifiedExtension::US_SSN(test_ssn)],
     };
 
+    // baseline serialized id
     let id_str = r#"{"uuid":"6db53f85-e3a2-4c1f-9471-d2429019736d","first_name":"First","middle_name":"Middle","last_name":"Last","date_of_birth":"1970-01-01","emails":["example@example.com"],"certified_extensions":[{"US_SSN":{"ssn":"000000000"}}]}"#;
 
-    // Must be run with `cargo test -- --nocapture`
     let deserialized: Id = serde_json::from_str(&id_str).unwrap();
 
+    // compare given str with deserialized json
     assert_eq!(_test_id, deserialized);
 }

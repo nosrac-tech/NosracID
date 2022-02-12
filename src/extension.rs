@@ -5,10 +5,33 @@ use serde::{Serialize, Deserialize};
 #[derive(Serialize, Deserialize, PartialEq, Debug)]
 #[allow(non_camel_case_types)]
 pub enum CertifiedExtension {
+    Passport(Passport),
     US_SSN(US_SSN),
     US_DLN(US_DLN),
-    US_PN(),
-    UK_NIN(),
+    UK_NIN(UK_NIN),
+    UK_DLN(UK_DLN),
+}
+
+
+/// US Passport Number
+#[derive(Serialize, Deserialize, PartialEq, Debug)]
+#[allow(non_camel_case_types)]
+pub struct Passport {
+    passport_num: String,
+    country: String,
+}
+
+impl Passport {
+    /// Creates a new Passport Number
+    pub fn new(_passport_num: String,
+               _country: String,
+        ) -> Option<Passport> {
+
+        Some(Passport {
+            passport_num: _passport_num,
+            country: _country,
+        })
+    }
 }
 
 /// Social Security numbers are stored
@@ -52,31 +75,6 @@ impl US_DLN {
     }
 }
 
-/// US Passport Number
-#[derive(Serialize, Deserialize, PartialEq, Debug)]
-#[allow(non_camel_case_types)]
-pub struct US_PN {
-    passport: String,
-}
-
-impl US_PN {
-    /// Creates a new Passport Number
-    pub fn new(_passport: String) -> Option<US_PN> {
-
-        // ensures that passport # is numeric only
-        let _passport: String = _passport.chars().filter(|c| c.is_digit(10)).collect();
-
-        // makes sure passport number is longer than 8 digits
-        if _passport.chars().count() <= 8 {
-            Some(US_PN {
-                passport: _passport,
-            })
-        } else {
-            None
-        }
-    }
-}
-
 #[derive(Serialize, Deserialize, PartialEq, Debug)]
 #[allow(non_camel_case_types)]
 pub struct UK_NIN {
@@ -103,5 +101,22 @@ impl UK_NIN {
             }
         }
         None
+    }
+}
+
+/// UK Driver License number
+#[derive(Serialize, Deserialize, PartialEq, Debug)]
+#[allow(non_camel_case_types)]
+pub struct UK_DLN {
+    dln: String,
+}
+
+impl UK_DLN {
+    /// Creates a new SSN
+    pub fn new(_dln: String) -> UK_DLN {
+        // Because DL # do not follow a standard format, no validation is necessary
+        UK_DLN {
+            dln: _dln,
+        }
     }
 }

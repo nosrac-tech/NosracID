@@ -1,4 +1,5 @@
 use serde::{Serialize, Deserialize};
+use chrono::{NaiveDate};
 
 
 /// List of certified extensions
@@ -19,17 +20,32 @@ pub enum CertifiedExtension {
 pub struct Passport {
     passport_num: String,
     country: String,
+    country_code: String,
+    place_of_birth: String,
+    issuing_authority: String,
+    issue_date: NaiveDate,
+    expiration_date: NaiveDate,
 }
 
 impl Passport {
     /// Creates a new Passport Number
     pub fn new(_passport_num: String,
                _country: String,
+               _country_code: String,
+               _place_of_birth: String,
+               _issuing_authority: String,
+               _issue_date: NaiveDate,
+               _expiration_date: NaiveDate
         ) -> Option<Passport> {
 
         Some(Passport {
             passport_num: _passport_num,
             country: _country,
+            country_code: _country_code,
+            place_of_birth: _place_of_birth,
+            issuing_authority: _issuing_authority,
+            issue_date: _issue_date,
+            expiration_date: _expiration_date,
         })
     }
 }

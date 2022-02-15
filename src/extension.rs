@@ -100,6 +100,10 @@ pub struct UK_NIN {
 impl UK_NIN {
     /// Creates a new Passport Number
     pub fn new(_nin: String) -> Option<UK_NIN> {
+
+        // These are UTF-8 encoded, so each character
+        // is a single byte. If these characters were
+        // differently encoded, a different subsetting strategy should be used.
         let mut first_seq = _nin[0..3].chars();
         let mut second_seq = _nin[3..9].chars();
         let mut final_seq = _nin[8..].chars();
